@@ -1,0 +1,13 @@
+{
+  "name": "entrust-edge-rest",
+  "version": "1.0.0",
+  "description": "REST api for the entrust-edge",
+  "author": "Xavier LaRue <xlarue@macadamian.com>",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "latest",
+    "macaddress": "^0.2.8",
+    "q": "^1.4.1"
+  }
+}
