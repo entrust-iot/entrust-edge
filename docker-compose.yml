@@ -1,0 +1,7 @@
+bridge:
+  build: bridge/
+  ports: 
+    - "1883:1883"
+discovery:
+  build: discovery/
+  net: "host"
