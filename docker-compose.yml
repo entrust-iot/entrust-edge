@@ -5,7 +5,3 @@ bridge:
 discovery:
   build: discovery/
   net: "host"
-rest:
-  build: rest/
-  ports: 
-    - "8080:8080"
