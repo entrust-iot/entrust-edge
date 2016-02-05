@@ -8,6 +8,7 @@
     "body-parser": "^1.14.1",
     "express": "latest",
     "macaddress": "^0.2.8",
+    "mqtt": "^1.6.1",
     "q": "^1.4.1"
   }
 }
