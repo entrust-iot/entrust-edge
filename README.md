@@ -17,6 +17,7 @@ Use a linux machine that supports docker.
   - `client.crt` client certificate
   - `client.key` client key
   - `ca.crt` CA certificate
+- Install the bridge client files for the entrust-service as per instructions in its [README](https://github.com/entrust-iot/entrust-service/blob/master/readme.md)
 - get into the top directory and execute
 - `$ docker-compose build`
 - `$ docker-compose up`
