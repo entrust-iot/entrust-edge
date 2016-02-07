@@ -13,6 +13,10 @@ Use a linux machine that supports docker.
 - If you use a virtual machine, make sure you use a 'bridged' network configuration.
 - Finally do a git-clone https://github.com/entrust-iot/entrust-edge
 - get into the bridge/security subdirectory and generate the security files following the README instructions
+- Install the following files in the service/src/security folder
+  - `client.crt` client certificate
+  - `client.key` client key
+  - `ca.crt` CA certificate
 - get into the top directory and execute
 - `$ docker-compose build`
 - `$ docker-compose up`

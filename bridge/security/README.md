@@ -16,5 +16,5 @@ Run the command in the same folder to use the same CA
 That will generate files <clientName>.crt, <clientName>.csr, <clientName.key>
 
 - copy the ca.crt, <clientName>.crt, <clientName.key> files to the security
-folder of the client
+folder of the clients (entrust-agent and entrust-edge/service)
 

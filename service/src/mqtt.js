@@ -1,8 +1,17 @@
 'use strict';
 
 function mqtt() {
-  var self = this,
-      mqtt = require('mqtt');
+  var self = this;
+
+  const mqtt = require('mqtt'),
+        fs = require('fs'),
+	Q = require('q');
+
+  const LOCALHOST = '127.0.0.1';
+  const SEC_DIR = 'security';
+  const SECURE_CERT = SEC_DIR + '/client.crt';
+  const SECURE_KEY = SEC_DIR + '/client.key';
+  const SECURE_CA = SEC_DIR + '/ca.crt';
 
   var client = undefined;
   var edgeId = undefined;;
@@ -36,15 +45,27 @@ function mqtt() {
   }
 
   function connect() {
-    client = mqtt.createClient(1883, '127.0.0.1', {
-      username: "",
-      password: ""
-    });
-
-    client.on('connect', connectHandler); 
-    client.on('close', closeHandler);
-    client.on("message", handleMessage);
+    readSecureFiles().then(function(options) {
+      client = mqtt.connect('mqtts://' + LOCALHOST, options);
+      client.on('connect', connectHandler);
+      client.on('close', closeHandler);
+      client.on("message", handleMessage);
+    }).done();
   }
+
+  function readSecureFiles() {
+    return Q.all([SECURE_CERT, SECURE_KEY, SECURE_CA]
+      .map(function(path) {
+        return Q.nfcall(fs.readFile, path);
+      }))
+    .spread(function (cert, key, ca) {
+      return {
+        cert: cert,
+        key: key,
+        ca: ca
+      };
+    });
+  };
 
   function connectHandler() {
     console.log('connected to *local* mqtt');
