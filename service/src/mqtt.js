@@ -23,7 +23,7 @@ function mqtt() {
   self.sendService = sendService;
 
   function init(id, initReq, initRes) {
-    connect();
+    connect(id);
 
     edgeId = id;
     initRequest = initReq;
@@ -44,8 +44,14 @@ function mqtt() {
     }
   }
 
-  function connect() {
+  function connect(edgeId) {
     readSecureFiles().then(function(options) {
+      options.will = {
+        topic: 'service/edge_disconnected',
+        payload: JSON.stringify({edgeId: edgeId}),
+        qos: 0,
+        retain: false
+      };
       client = mqtt.connect('mqtts://' + LOCALHOST, options);
       client.on('connect', connectHandler);
       client.on('close', closeHandler);
