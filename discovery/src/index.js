@@ -12,6 +12,11 @@ var adapter = ifaces['eth0'];
 console.log('Checking for eth0');
 
 if(!adapter) {
+  adapter = ifaces['eth1'];
+  console.log('Checking for eth1');
+}
+
+if(!adapter) {
   adapter = ifaces['Ethernet'];
   console.log('Checking for Ethernet');
 }
@@ -50,15 +55,15 @@ socket.bind(broadcastPort, addr,  function() {
 
 
 setInterval(function () {
-	socket.send(new Buffer(addr), 
-			0, 
-			addr.length, 
-			broadcastPort, 
-			broadcastAddress, 
-			function (err) {
-				if (err) console.log(err);
-			}
-	);
+  socket.send(new Buffer(addr),
+      0,
+      addr.length,
+      broadcastPort,
+      broadcastAddress,
+      function (err) {
+        if (err) console.log(err);
+      }
+  );
 }, 1000);
 
 console.log('broadcast server started with addr:', addr);
